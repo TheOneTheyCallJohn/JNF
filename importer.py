@@ -2,9 +2,9 @@ import math
 importedSTLS = []
 
 
-def openfile(filename, Class, pos):
+def openfile(length, filename, Class, pos):
     filepath = filename
-    newstl = [[len(importedSTLS)+1, Class, filename], pos, [],[[math.inf,math.inf,math.inf],[-math.inf,-math.inf,-math.inf]]]
+    newstl = [[length, Class, filename], pos, [],[[math.inf,math.inf,math.inf],[-math.inf,-math.inf,-math.inf]],[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]]]
 
     current_triangle = []
     with open(filepath, 'r') as file:
@@ -36,10 +36,15 @@ def openfile(filename, Class, pos):
                     current_triangle = []
     return newstl
     
+def actuallyopenfile(filename, importedSTLS, neutrons):
+    with open("data.pkl", "rb") as file:
+        my_list = pickle.load(importedSTLS, file)
+        my_list = pickle.load(neutrons, file)
+    return importedSTLS, neutrons
 
-
-def savefile(filename, importedSTLS):
-    print("pee pee poo poo")
-
+def savefile(filename, importedSTLS, neutrons):
+    with open("data.pkl", "wb") as file:
+        pickle.dump(importedSTLS, file)
+        pickle.dump(neutrons, file)
 
 #print(importedSTLS)
